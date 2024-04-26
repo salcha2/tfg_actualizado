@@ -10,6 +10,9 @@
     "vite": "^5.2.10"
   },
   "dependencies": {
-    "ol": "latest"
+    "express": "^4.19.2",
+    "geojson": "^0.5.0",
+    "ol": "latest",
+    "pg": "^8.11.5"
   }
 }
