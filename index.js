@@ -1,28 +1,39 @@
-mapboxgl.accessToken = "pk.eyJ1IjoiaW5nanVhbm1hc3VhcmV6IiwiYSI6ImNsZDZjMXJpYTFhdzgzdnBhZXdkczQxcnQifQ.25y1PWrOTW12YssZ73JQtA"
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import TileWMS from 'ol/source/TileWMS';
+import { fromLonLat } from 'ol/proj';
 
-const mapa = new mapboxgl.Map({
-    container: "contenedor-del-mapa",
-    style: "mapbox://styles/mapbox/dark-v10",
-    center: [-74.12, 4.65],
-    zoom: 11
-})
+// URL del servicio WMS proporcionado por GeoServer
+const geoserverWMSUrl = 'http://localhost:8080/geoserver/wms';
 
-const marcador = new mapboxgl.Marker({
-    color: "green",
-    rotation: 45
-}).setLngLat([-74.0654527, 4.6281045]).addTo(mapa)
+// Nombre de la capa que quieres cargar desde GeoServer
+//const geoserverLayerName = 'datos4';
 
-const popup = new mapboxgl.Popup({
-    offset: 25
-}).setHTML("<h3>Hola GeoCositas</h3>")
-//.setText("Hola GeoCositas")
+// Crear una instancia del TileLayer con el servicio WMS de GeoServer
+const geoserverLayer = new TileLayer({
+  source: new TileWMS({
+    url: geoserverWMSUrl,
+    params: {
+      'LAYERS': 'datos4:datos4',
+    },
+    serverType: 'geoserver',
+  }),
+});
 
-const marcador2 = new mapboxgl.Marker({
-}).setLngLat([-74.063889, 4.613573]).setPopup(popup).addTo(mapa)
+// Crear una instancia del mapa y agregar las capas
+const map = new Map({
+  layers: [
+    new TileLayer({
+      source: new OSM(),
+    }),
+    geoserverLayer,
+  ],
+  view: new View({
+    center: fromLonLat([-74.12, 4.65]), // Coordenadas de centro de la vista
+    zoom: 11, // Nivel de zoom inicial
+  }),
+});
 
-function clicSobreMapa(evento){
-    console.log(evento)
-    alert("Diste clic en el punto con coordenadas latitud: " + evento.lngLat.lat + " y longitud: " + evento.lngLat.lng)
-}
-
-mapa.on("click", clicSobreMapa)
+// Asociar el mapa con el elemento HTML
+map.setTarget('map');
