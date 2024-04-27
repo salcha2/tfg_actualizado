@@ -264,7 +264,7 @@ GeoMap.prototype.CrearBarraBusquedaGeoJson= function(vectorLayerGeoJson){
     if(vectorLayerGeoJson){
         var controlBusqueda = new ol.control.SearchFeature({
             source:vectorLayerGeoJson,
-            property:'descripcion'
+            property:'usuario'
         });
         this.map.addControl(controlBusqueda);
 
