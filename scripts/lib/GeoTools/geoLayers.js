@@ -80,28 +80,28 @@ GeoLayers.prototype.ObtenerLayersSobrepuestos=function(){
     });
 }
 
-GeoLayers.prototype.ObtenerLayersGeoJSON= function(){
+GeoLayers.prototype.ObtenerLayersGeoJSON = function(){
     var lista = [];
 
     this.vectorGeoJson = new ol.source.Vector({
-        url:'resources/punto.json',
+        url: 'http://localhost:8080/geoserver/datos4/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=datos4&outputFormat=application/json',
         format: new ol.format.GeoJSON()
     });
 
     var lyrGeojson = new ol.layer.Vector({
-        title:'Punto Geojson',
+        title: 'Punto Geojson',
         style: new ol.style.Style({
             image: new ol.style.Icon({
-                src:'resources/iconos/condominium.png'
+                src: 'resources/iconos/condominium.png'
             })
         }),
-        source:this.vectorGeoJson
+        source: this.vectorGeoJson
     });
     lista.push(lyrGeojson);
 
     return new ol.layer.Group({
-        title:'Capas GeoJson',
+        title: 'Capas GeoJson',
         visible: false,
         layers: lista
-    })
+    });
 }
