@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="scripts/lib/ol-v6.13.0/ol.css">
     <script src="scripts/lib/ol-v6.13.0/ol.js"></script>
 
-    <link rel="stylesheet" href="http://raw.githack.com/walkermatt/ol-layerswitcher/master/dist/ol-layerswitcher.css"  type="text/css">
-    <script src="http://raw.githack.com/walkermatt/ol-layerswitcher/master/dist/ol-layerswitcher.js"></script>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/walkermatt/ol-layerswitcher/9c92b2e3bf40f58f007db92427d1b5133447a939/dist/ol-layerswitcher.css"  type="text/css">
+    <script src="https://rawcdn.githack.com/walkermatt/ol-layerswitcher/9c92b2e3bf40f58f007db92427d1b5133447a939/dist/ol-layerswitcher.js"></script>
 
     <link rel="stylesheet" href="scripts/lib/ol-ext-v3.2.23/ol-ext.css">
     <script src="scripts/lib/ol-ext-v3.2.23/ol-ext.js"></script>
@@ -28,15 +28,22 @@
             width: 800px;
             height: 700px;;
         }
+
+        #info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: white;
+            padding: 5px;
+            border: 1px solid black;
+        }
     </style>
 
 </head>
 <body>
     <h1>Proyecto GeoTools</h1>
     <div id="map"></div>
-    <div id="mouse-position"></div>
-
-    <button onclick="alert('¡Botón clickeado!')">Haz clic aquí</button>
+    <div id="info">&nbsp;</div>
 
     <script>
         CargarMapa();
