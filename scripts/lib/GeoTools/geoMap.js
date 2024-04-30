@@ -248,34 +248,33 @@ GeoMap.prototype.CrearControlBarraDibujo=function(){
 
 }
 
-GeoMap.prototype.CrearBarraBusquedaGeoJson= function(vectorLayerGeoJson){
-
+GeoMap.prototype.CrearBarraBusquedaGeoJson = function(vectorLayerGeoJson) {
     var self = this;
 
-    if(!this.mainBarCustom){
+    if (!this.mainBarCustom) {
         this.mainBarCustom = new ol.control.Bar();
         this.map.addControl(this.mainBarCustom);
-        this.mainBarCustom.setPosition('top');  
+        this.mainBarCustom.setPosition('top');
     }
 
     var select = new ol.interaction.Select({});
     this.map.addInteraction(select);
 
-    if(vectorLayerGeoJson){
+    if (vectorLayerGeoJson) {
         var controlBusqueda = new ol.control.SearchFeature({
-            source:vectorLayerGeoJson,
-            property:'usuario'
+            source: vectorLayerGeoJson,
+            property: 'usuario'
         });
         this.map.addControl(controlBusqueda);
 
-        controlBusqueda.on('select', function(e){
+        controlBusqueda.on('select', function(e) {
             select.getFeatures().clear();
             select.getFeatures().push(e.search);
+            var propiedades = e.search.getProperties();
+            mostrarPropiedades(propiedades);
             var p = e.search.getGeometry().getFirstCoordinate();
-            self.map.getView().animate({center: p, zoom:19});            
+            self.map.getView().animate({ center: p, zoom: 19 });
         });
-
-
     }
-    
 }
+

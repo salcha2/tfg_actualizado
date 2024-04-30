@@ -24,32 +24,55 @@
     <script src="scripts/appMap.js"></script>
 
     <style>
-        #map{
+        #map-container {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+        }
+
+        #map {
+            flex: 1;
             width: 800px;
-            height: 700px;;
+            height: 700px;
         }
 
         #info {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
+            flex: 0 0 auto;
+            width: 300px;
             background-color: white;
-            padding: 5px;
+            padding: 10px;
             border: 1px solid black;
+            overflow-y: auto;
+            margin-left: 10px;
+        }
+
+        h1 {
+            margin-bottom: 0;
         }
     </style>
 
 </head>
 <body>
     <h1>Proyecto GeoTools</h1>
-    <div id="map"></div>
-    <div id="info">&nbsp;</div>
+    <div id="map-container">
+        <div id="map"></div>
+        <div id="info">&nbsp;</div>
+    </div>
 
     <script type="module" src="algo.js"></script>
 
 
     <script>
         CargarMapa();
+
+        function mostrarPropiedades(propiedades) {
+            var infoDiv = document.getElementById('info');
+            var contenido = '<h2>Propiedades seleccionadas:</h2>';
+            for (var propiedad in propiedades) {
+                contenido += '<p><strong>' + propiedad + '</strong>: ' + propiedades[propiedad] + '</p>';
+            }
+            infoDiv.innerHTML = contenido;
+        }
     </script>
 </body>
 </html>
