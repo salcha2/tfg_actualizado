@@ -115,7 +115,12 @@
     	<!-- ------------------------------------------ -->
     	<!-- --------- Variables de Art-Risk3 --------- -->
     	<!-- ------------------------------------------ -->
-    	
+
+		
+		<div id="id_container" class="container">    
+			<div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+
+	
       <!--    <form method="post" action=".">   -->
       <input type='hidden' name='csrfmiddlewaretoken' value='XFe2r</fieldset>TYl9WOpV8U6X5CfbIuOZOELJ97S' >
       <!-- <form  class="form-horizontal" method="post" onsubmit="return Press(this)" action="cgi/info.php">  -->
@@ -536,33 +541,31 @@
 
 
 
-								<div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-    
-									<!-- --------- Selector de coordenadas del edificio --------- -->
+								<div id="signupbox" style="margin-top: 50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+									<!-- Selector de coordenadas del edificio -->
 									<div class="panel panel-info">
 										<div class="panel-heading">
-											<div class="panel-title">Coordenadas del edificio </div>    
+											<div class="panel-title">Coordenadas del edificio</div>
+										</div>
+										<div class="panel-body">
+											<!-- Latitud -->
+											<div class="form-group row">
+												<label for="latinput" class="form_label col-md-4 col-lg-4 manual_variable_label">Latitud</label>
+												<div class="controls col-md-8 col-lg-8">
+													<input id="latinput" class="form-control manual_variable_input" name="latinput" type="text" value="" title="Latitud">
+												</div>
 											</div>
-											<div class="panel-body" >
-							
-												<!-- Latitud -->
-										   <div class="form-group row ">
-											   
-											   <label for="latinput"  class="form_label col-md-6 col-lg-6 manual_variable_label"> Latitud </label>
-													<div class="controls col-md-6 col-lg-6">
-											  <input id="latinput" class="manual_variable_input" name="latinput" type="text"  value="" title="Latitud">
-											  </div>
-										   </div>
-							
-												<!-- Longitud -->
-										   <div class="form-group row ">
-											   <label for="loninput"  class="form_label col-md-6 col-lg-6 manual_variable_label"> Longitud </label>
-													<div class="controls col-md-6 col-lg-6">
-												   <input id="loninput" class="manual_variable_input" name="loninput" type="text" value="" title="Longitud">
-											  </div>
-										   </div>
-							
+											<!-- Longitud -->
+											<div class="form-group row">
+												<label for="loninput" class="form_label col-md-4 col-lg-4 manual_variable_label">Longitud</label>
+												<div class="controls col-md-8 col-lg-8">
+													<input id="loninput" class="form-control manual_variable_input" name="loninput" type="text" value="" title="Longitud">
+												</div>
 											</div>
+										</div>
+									</div>
+								</div>
+								
 							 
 											<!-- ------ Coordinates message display ------ --> 
 											<div class="form-group">
@@ -641,9 +644,9 @@
 
 
 								<div class="form-group row ">
-									<label for="result_functionality" class="control-label col-md-6 col-lg-6 manual_variable_label">  Indice de funcionalidad: </label>
+									<label for="result_functionality" class="control-label col-md-6 col-lg-6 manual_variable_label">  I</label>
 									<div class="controls form_select col-md-2 col-lg-2">
-											<button class="btn btn-primary" type="submit">Enviar </button>
+											<button class="btn btn-primary" type="submit">Registrar </button>
 									</div>
 										</div>
 
@@ -659,7 +662,7 @@
 								
                                 <!-- --> <input type="submit" name="Signup" value="Enviar" class="btn btn-primary" id="submit-id-send" title="Enviar" > <!--  --> 
 													  <input type="submit" name="Clean" value="Limpiar todo" style="margin-left: 10%" class="btn btn-primary btn btn-info" id="submit-id-clean" title="Limpiar" > 
-													<button class="btn btn-primary" type="submit">Enviar</button>
+													
 													
                             </div>
 							
