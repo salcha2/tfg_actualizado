@@ -280,7 +280,6 @@ GeoMap.prototype.CrearBarraBusquedaGeoJson = function(vectorLayerGeoJson) {
 }
 
 
-
 GeoMap.prototype.CrearEventoClicEnMapa = function() {
     var self = this;
     
@@ -291,9 +290,6 @@ GeoMap.prototype.CrearEventoClicEnMapa = function() {
         
         // Convertir las coordenadas a la proyección del servidor (EPSG:4326)
         var lonLatCoordinate = ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326');
-        
-        // Mostrar las coordenadas en la consola
-        console.log('Coordenadas de clic:', lonLatCoordinate);
         
         // Realizar la solicitud al servidor para obtener información asociada a las coordenadas
         axios.get('http://localhost:8080/geoserver/datos4/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=datos4%3Adatos4&maxFeatures=50&outputFormat=application%2Fjson')
@@ -315,9 +311,15 @@ GeoMap.prototype.CrearEventoClicEnMapa = function() {
             
             // Manejar la entidad más cercana
             if (closestFeature) {
-                console.log('Información asociada al punto:', closestFeature);
+                console.log('Información asociada al punto:', closestFeature.properties);
+                mostrarPropiedades(closestFeature.properties);
+                
+                // Centrar el mapa en la entidad seleccionada
+                var p = closestFeature.geometry.coordinates;
+                //self.map.getView().animate({ center: p, zoom: 19 });
             } else {
                 console.log('No se encontró ninguna entidad cercana al punto de clic.');
+                mostrarPropiedades({});
             }
         })
         .catch(function(error) {
@@ -326,6 +328,16 @@ GeoMap.prototype.CrearEventoClicEnMapa = function() {
         });
     });
 };
+
+function mostrarPropiedades(propiedades) {
+    var infoDiv = document.getElementById('info');
+    var contenido = '<h2>Propiedades seleccionadas:</h2>';
+    for (var propiedad in propiedades) {
+        contenido += '<p><strong>' + propiedad + '</strong>: ' + propiedades[propiedad] + '</p>';
+    }
+    infoDiv.innerHTML = contenido;
+}
+
 
 
 
