@@ -1,3 +1,4 @@
+
 function GeoMap(){
     this.map=null;
     this.mainBarCustom =null;
@@ -277,4 +278,54 @@ GeoMap.prototype.CrearBarraBusquedaGeoJson = function(vectorLayerGeoJson) {
         });
     }
 }
+
+
+
+GeoMap.prototype.CrearEventoClicEnMapa = function() {
+    var self = this;
+    
+    // Agregar un evento de clic al mapa
+    this.map.on('click', function(event) {
+        // Obtener las coordenadas del punto donde se hizo clic
+        var coordinate = event.coordinate;
+        
+        // Convertir las coordenadas a la proyección del servidor (EPSG:4326)
+        var lonLatCoordinate = ol.proj.transform(coordinate, 'EPSG:3857', 'EPSG:4326');
+        
+        // Mostrar las coordenadas en la consola
+        console.log('Coordenadas de clic:', lonLatCoordinate);
+        
+        // Realizar la solicitud al servidor para obtener información asociada a las coordenadas
+        axios.get('http://localhost:8080/geoserver/datos4/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=datos4%3Adatos4&maxFeatures=50&outputFormat=application%2Fjson')
+        .then(function(response) {
+            // Obtener todas las entidades del JSON
+            var features = response.data.features;
+            
+            // Buscar la entidad más cercana al punto de clic
+            var closestFeature = null;
+            var closestDistance = Infinity;
+            features.forEach(function(feature) {
+                var coordinates = feature.geometry.coordinates;
+                var distance = Math.sqrt(Math.pow(coordinates[0] - lonLatCoordinate[0], 2) + Math.pow(coordinates[1] - lonLatCoordinate[1], 2));
+                if (distance < closestDistance) {
+                    closestFeature = feature;
+                    closestDistance = distance;
+                }
+            });
+            
+            // Manejar la entidad más cercana
+            if (closestFeature) {
+                console.log('Información asociada al punto:', closestFeature);
+            } else {
+                console.log('No se encontró ninguna entidad cercana al punto de clic.');
+            }
+        })
+        .catch(function(error) {
+            // Manejar errores de la solicitud
+            console.error('Error al obtener información:', error);
+        });
+    });
+};
+
+
 
