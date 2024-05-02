@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<title title="Herramienta de Art-Risk">Herramienta - Art-Risk</title>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151025138-1"></script>
+	<script>
+  		window.dataLayer = window.dataLayer || [];
+  			function gtag(){dataLayer.push(arguments);}
+  			gtag('js', new Date());
+  		gtag('config', 'UA-151025138-1');
+	</script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Art-Risk tool for cultural heritage buildings evaluation">
+    <meta name="author" content="lara" >
+
+	 <!-- Language menu -->
+	 <div  class="container">
+		<div  class="row col-lg-offset-11 col-md-offset-11 col-lg-1 col-md-1    col-sm-offset-11 col-xs-offset-9 col-sm-1 col-xs-1">
+				 <a class="language_label" href="tool_en.html"> English  </a>
+		</div>
+	</div> 
+	
+	
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="css/art-risk.css" type="text/css" rel="stylesheet">
+    <link href="ol_v5.2.0/ol.css" type="text/css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="brand">Art-Risk</div>
+    <div class="address-bar">Inteligencia artificial aplicada a la conservación preventiva de edificios patrimoniales</div>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Art-Risk</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Inicio</a>
+                    </li>
+                    <li><a href="guia.html">Guia</a>
+                    </li>
+                    <li><a href="herramienta.html">Herramienta</a>
+                    </li>
+                    <li><a href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center"><strong>Editar informacion</strong>
+                    </h2>
+                    <hr>
+                    <!-- <img class="img-responsive img-border img-left" src="img/intro-pic.jpg" alt=""> -->
+                    <hr class="visible-xs">
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+	<!-- ---------------- FORMULARIO DE ENTRADA DE VARIABLES ---------------- -->
+
+
+    	<!-- ------------------------------------------ -->
+    	<!-- --------- Variables de Art-Risk3 --------- -->
+    	<!-- ------------------------------------------ -->
+
+		
+		<div id="id_container" class="container">    
+			<div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+
+	
+      <!--    <form method="post" action=".">   -->
+      <input type='hidden' name='csrfmiddlewaretoken' value='XFe2r</fieldset>TYl9WOpV8U6X5CfbIuOZOELJ97S' >
+      <!-- <form  class="form-horizontal" method="post" onsubmit="return Press(this)" action="cgi/info.php">  -->
+      <!--  <form  class="form-horizontal" method="post" onsubmit="return Press(this)"> -->
+      <form  id="main_form" class="form-horizontal" onsubmit="event.preventDefault();" method="post" actio>
+                    
+        <fieldset>             
+        <div class="panel panel-info">
+            
+										<div class="panel-heading">
+											<div class="panel-title">Coordenadas del edificio</div>
+										</div>
+										<div class="panel-body">
+											<!-- Latitud -->
+											<div class="form-group row">
+												<label for="latinput" class="form_label col-md-4 col-lg-4 manual_variable_label">Latitud</label>
+												<div class="controls col-md-8 col-lg-8">
+													<input id="latinput" class="form-control manual_variable_input" name="latinput" type="text" value="" title="Latitud">
+												</div>
+											</div>
+											<!-- Longitud -->
+											<div class="form-group row">
+												<label for="loninput" class="form_label col-md-4 col-lg-4 manual_variable_label">Longitud</label>
+												<div class="controls col-md-8 col-lg-8">
+													<input id="loninput" class="form-control manual_variable_input" name="loninput" type="text" value="" title="Longitud">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+							 
+											<!-- ------ Coordinates message display ------ --> 
+											<div class="form-group">
+												<div class="col-xs-9 col-md-offset-1 col-lg-offset-1 col-md-8 col-lg-9">
+												<div id="error_coordinates_messages"> </div>
+												</div>
+											</div>
+							
+							
+										   
+											 <!-- Botón selector gráfico de coordenadas -->  
+											 <div class="form-group row"> 
+											<!-- <div class="aab controls col-md-4 "> </div> -->  
+												  <div class="col-lg-6 col-md-6 "> 	<!-- -->  	
+														 <button type="button" class="button_coordinates btn btn-primary col-md-11 col-ld-11" data-toggle="modal" data-target="#myModal">
+													  Seleccionar coordenadas
+													</button>
+												</div>
+												<div class="col-lg-6 col-md-6 "> 	<!-- -->  	
+													<button type="button" class="button_coordinates btn btn-primary col-md-11 col-ld-11" id="validate_coordinates_button">
+													  Validar coordenadas
+													</button>
+													 </div> <!-- -->
+											 </div>
+											 <br>
+											 <br>
+											 
+											 
+											 <!-- Barra de progreso -->  
+											 <div class="form-group row"> 
+											<div class="progress  col-xs-offset-2 col-xs-8   col-sm-offset-2 col-sm-8   col-md-offset-2 col-md-8   col-lg-offset-2 col-lg-8">
+												<div id="progress-bar1" class="progress-bar progress_bar_art-risk" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"> </div> 
+											</div> 	
+											</div>			
+							 
+										
+							 
+										<!-- Ventana Modal asociada al botón de selección de coordenadas -->
+										
+										<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog modal-lg" role="document">
+											   <div class="modal-content">
+												  <div class="modal-header">
+													 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														<h5 class="modal-title text-center" id="myModalLabel">Haga click en el mapa para obtener las coordenadas geográficas</h5>
+												 </div>
+												 <!--  Mapa -->
+												 <div class="modal-body">
+													 <div id="art-risk_map" class="map"></div>
+												 </div>
+												  <!--  Fin Mapa --> 
+												 <div class="row">
+															<div class="col-xs-offset-1 col-xs-5">
+																<label for="id_lat_modal" class="automatic_variable_label col-xs-3 col-md-3 col-lg-3"> Latitud:  </label>
+																<input name="latitud" id="id_lat_modal" class="automatic_variable_input" size = "20" maxlength = "20" type="text" value="" readonly > 
+															</div>
+															<div class="col-xs-offset-0 col-xs-6">
+																<label for="id_lon_modal" class="automatic_variable_label col-xs-3 col-md-3 col-lg-3"> Longitud:  </label>
+																<input name="longitud" id="id_lon_modal" class="automatic_variable_input" size = "20" maxlength = "20" type="text" value="" readonly > 
+															</div>                     
+												 </div>
+												 <div class="modal-footer footer_center">
+													 <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button> -->
+													<button id="button_accept_modal" type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+													 <button id="button_cancel_modal" type="button" class="btn btn-primary btn-info" data-dismiss="modal">Cancelar</button>
+												 </div>
+											  </div>
+										   </div>
+									   </div>
+																	
+															
+											
+										</div>
+									<br>
+									<br>
+
+
+								<div class="form-group row ">
+									<label for="result_functionality" class="control-label col-md-6 col-lg-6 manual_variable_label">  I</label>
+									<div class="controls form_select col-md-2 col-lg-2">
+											<button class="btn btn-primary" type="submit">Registrar </button>
+									</div>
+										</div>
+
+										<div class="mt-3" id="respuesta">
+            
+
+										</div>
+
+							<!-- ------ Send and Clean Button ------ --> 
+                        <div class="form-group"> 
+                            <div class="aab controls col-md-4 "></div>
+                            <div class="controls col-md-8 ">
+								
+                                <!-- --> <input type="submit" name="Signup" value="Enviar" class="btn btn-primary" id="submit-id-send" title="Enviar" > <!--  --> 
+													  <input type="submit" name="Clean" value="Limpiar todo" style="margin-left: 10%" class="btn btn-primary btn btn-info" id="submit-id-clean" title="Limpiar" > 
+													
+													
+                            </div>
+							
+							
+                        </div> 
+                        <!-- ----------------- -->    
+   			
+    			</div> 
+       </div> 
+       
+       
+       
+     </form>        
+        
+    </div> 
+</div>
+
+
+	<!-- -------------------------------------------------------------------- -->
+
+    <footer>
+
+                <div class="text-center">
+    						<!-- CopyRight -->
+    						<!-- Información Legal -->
+    		         	 <p class=""> <?php echo date("Y"); ?> &copy; Universidad Pablo de Olavide y Universidad de Sevilla  <a class="" data-toggle="modal" href="#myModalLegal">Información Legal</a> 
+								<a href="https://www.w3.org/WAI/WCAG2AA-Conformance" title="Explanation of WCAG 2.0 Level Double-A Conformance">
+  								<img height="32" width="88" src="https://www.w3.org/WAI/wcag2AA-blue" alt="Level Double-A conformance, W3C WAI Web Content Accessibility Guidelines 2.0">
+								</a>    		         	     		         	 
+    		         	 </p> 
+                </div>
+            <!-- </div>      	
+  	
+         </div> <!-- --> 
+         
+
+         <!-- Ventana Modal asociada a la información legal -->
+            
+            <div class="modal fade" id="myModalLegal" tabindex="-1" role="dialog">
+            	<!-- <div class="modal-dialog modal-lg" role="document"> -->
+            	<div class="modal-dialog modal-lg" role="document">
+               	<div class="modal-content">
+							<div class="modal-body legal_footer_text">
+								<h4> DERECHOS DE PROPIEDAD INDUSTRIAL E INTELECTUAL</h4>
+								<h6><p>Tanto este sitio Web, como los contenidos y los signos distintivos aparecidos en el mismo, excepto indicación expresa en contrario, es propiedad del equipo de Art-Risk, de la Universidad Pablo de Olavide y de la Universidad de Sevilla, y se encuentran protegidos por los derechos de propiedad industrial e intelectual conforme a la legislación española e internacional. Por tanto, todos sus contenidos no podrán ser objeto de manipulación alguna (modificación, copia, alteración, reproducción, transmisión, adaptación, traducción, etc.) por parte del Usuario o de terceros, ya sea total o parcialmente sin la expresa autorización por parte del equipo de Art-Risk, la Universidad Pablo de Olavide y la Universidad de Sevilla, salvo que se indique lo contrario.</p></h6>
+								<h4>ENLACES </h4>
+								<h6><p> En esta Web se ofrece una selección de enlaces, directa o indirectamente, a recursos u otras Web de terceros, cuyo contenido puede variar, de forma muy rápida, por las características propias de Internet. La presencia de estos enlaces en el sitio Web tienen una finalidad informativa, no constituyendo en ningún caso una invitación a la contratación de productos o servicios que se ofrezcan en el sitio Web de destino. El equipo de Art-Risk no se hace en ningún caso responsable de las informaciones, servicios y contenido en general de dichas Web de terceros.</p></h6>
+								<h4>EMPLEO DE COOKIES</h4>
+								<h6><p>El equipo de Art-Risk podrá utilizar 'cookies' para personalizar y facilitar al máximo la navegación del usuario por su sitio web. Las 'cookies' se asocian únicamente a un usuario anónimo y su ordenador y no proporcionan referencias que permitan deducir datos personales del usuario. El usuario podrá configurar su navegador para que notifique y rechace la instalación de las 'cookies' enviadas por Art-Risk, sin que ello perjudique la posibilidad del usuario de acceder a los contenidos.</p></h6>
+								<h4>CONDICIONES DE USO. EXENCIÓN DE RESPONSABILIDAD</h4>
+								<h6><p>En esta Web se ofrece una selección de enlaces, directa o indirectamente, a recursos u otras Web de terceros, cuyo contenido puede variar, de forma muy rápida, por las características propias de Internet. La presencia de estos enlaces en el sitio Web tienen una finalidad informativa, no constituyendo en ningún caso una invitación a la contratación de productos o servicios que se ofrezcan en el sitio Web de destino. El equipo de Art-Risk no se hace en ningún caso responsable de las informaciones, servicios y contenido en general de dichas Web de terceros. Los autores se eximen de cualquier responsabilidad que pudiera derivarse del uso del software Art-Risk. </p></h6>
+								<h4>TRATAMIENTO DE LOS DATOS DE CARÁCTER PERSONAL</h4>
+								<h6><p>De conformidad a la Ley Orgánica 15/1999, de 13 de diciembre, de Protección de Datos de Carácter Personal (LOPD), y demás normativa vigente, los datos de carácter personal suministrados, en su caso, por el Usuario quedarán incorporados a un fichero automatizado de la titularidad del equipo de investigación de Art-Risk, el cual será procesado exclusivamente para la finalidad descrita en el correspondiente formulario de recogida de datos.
+								Los datos de carácter personal serán tratados con el grado de protección adecuado, de acuerdo con el Real Decreto 1720/2007, de 21 de diciembre, y demás normativa de aplicación en cada momento, tomándose las medidas de seguridad necesarias para evitar su alteración, pérdida, tratamiento o acceso no autorizado por parte de terceros.
+								El equipo de Art-Risk se compromete a no ceder, comunicar ni compartir los datos personales que en su caso sean facilitados por el usuario en beneficio de terceros, salvo consentimiento del afectado. Los datos, en su caso, facilitados no serán utilizados con finalidades distintas a las que motivó su recogida y serán cancelados cuando dejen de ser necesarios a tal fin. El usuario puede acceder a la información del sitio Web sin necesidad de proporcionar ningún dato de carácter personal.
+								El Usuario podrá ejercitar sus derechos de oposición, acceso, rectificación y/o cancelación, en los términos establecidos en la normativa vigente, comunicándolo por escrito a la directora del proyecto Art-Risk, Dra. Maria Pilar Ortíz Calderón con dirección Edificio 22, planta 4, Despacho 6, Universidad Pablo de Olavide, Carretera de Utrera, 1, Sevilla-41013 , o vía correo electrónico a mportcal@upo.es indicando claramente el objeto de dicha comunicación.</p></h6>
+								<h4>LEGISLACIÓN Y JURISDICCIÓN APLICABLE</h4>
+								<h6><p>Las presentes Condiciones de Acceso quedan sujetas al ordenamiento jurídico español. Para la resolución de cualquier conflicto que pudiera derivarse del acceso a la página Web, el usuario y el equipo de Art-Risk, acuerdan someterse expresamente a los juzgados y tribunales de la ciudad de Sevilla (España), con renuncia a cualquier otro fuero general o especial. </p></h6>
+							</div>
+                  	<div class="modal-footer footer_center">
+							 	<button id="button_cancel_legalmodal" type="button" class="btn btn-primary btn-info" data-dismiss="modal">Aceptar</button>
+                  	</div>
+                 	</div>
+
+               </div>
+           </div>
+    </footer>
+
+
+
+    <!-- JavaScript -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>  
+    <script type="text/javascript" src="js/art-risk-tool.js"></script> 
+	<script type="text/javascript" src="js/click.js"></script> 
+
+	 <script type="text/javascript" src="ol_v5.2.0/ol.js"></script> 
+	 <!-- --> <script type="text/javascript" src="js/art-risk-map.js"></script> <!-- - -->
+	 <!--  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script> <!-- - -->
+
+
+</body>
+
+</html>
