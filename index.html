@@ -4,7 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto GeoTools</title>
+    <meta name="description" content="">
+    <meta name="author" content="lara" >
+    <title title="Página de inicio de Art-Risk">Inicio - Art-Risk</title>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151025138-1"></script>
+	<script>
+  		window.dataLayer = window.dataLayer || [];
+  			function gtag(){dataLayer.push(arguments);}
+  			gtag('js', new Date());
+  		gtag('config', 'UA-151025138-1');
+	</script>
+
+     <!-- Bootstrap core CSS -->
+     <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+
+     <!-- Add custom CSS here -->
+     <link href="css/art-risk.css?v=1" type="text/css" rel="stylesheet">
+     
+      <!-- Language menu -->
+      <div  class="container">
+         <div  class="row col-lg-offset-11 col-md-offset-11 col-lg-1 col-md-1    col-sm-offset-11 col-xs-offset-9 col-sm-1 col-xs-1">
+                  <a class="language_label"  href="index_en.html"> English  </a>             
+         </div>
+         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3">
+             <?php include 'logout.php'; ?>
+         </div>
+     </div>    
+
+
+
 
     <link rel="stylesheet" href="scripts/lib/ol-v6.13.0/ol.css">
     <script src="scripts/lib/ol-v6.13.0/ol.js"></script>
@@ -54,7 +83,39 @@
 
 </head>
 <body>
-    <h1>Proyecto GeoTools</h1>
+    <!-- <div class="brand"> <a href="http://www.upo.es/investiga/art-risk"> Art-Risk </a>  </div> -->
+    <div class="brand"> Art-Risk  </div>
+    <div class="address-bar">Inteligencia artificial aplicada a la conservación preventiva de edificios patrimoniales</div>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Art-Risk</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Inicio</a>
+                    </li>
+                    <li><a href="guia.html">Guia</a>
+                    </li>
+                    <li><a href="herramienta.html">Herramienta</a>
+                    </li>
+                    <li><a href="contacto.html">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
     <div id="map-container">
         <div id="map"></div>
         <div id="info">&nbsp;</div>
