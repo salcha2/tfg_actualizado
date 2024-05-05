@@ -1,3 +1,10 @@
+<?php
+  session_start();
+  if(isset($_SESSION['user'])){
+    header('location:home.php');
+  }
+  ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,21 +27,24 @@
               <h1 class="text-center font-weight-bold text-primary">Sign in to Account</h1>
               <hr class="my-3" />
               <form action="#" method="post" class="px-3" id="login-form">
+                <div id="loginAlert"></div>
                 <div class="input-group input-group-lg form-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text rounded-0"><i class="far fa-envelope fa-lg fa-fw"></i></span>
                   </div>
-                  <input type="email" id="email" name="email" class="form-control rounded-0" placeholder="E-Mail" required />
+                  <input type="email" id="email" name="email" class="form-control rounded-0" placeholder="E-Mail" required value="<?php if(isset($_COOKIE['email'])) {echo $_COOKIE['email']; } ?>" >
                 </div>
                 <div class="input-group input-group-lg form-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text rounded-0"><i class="fas fa-key fa-lg fa-fw"></i></span>
                   </div>
-                  <input type="password" id="password" name="password" class="form-control rounded-0" minlength="5" placeholder="Password" required autocomplete="off" />
+                  <input type="password" id="password" name="password" class="form-control rounded-0" minlength="5" placeholder="Password"required value="<?php if(isset($_COOKIE['password'])) {echo $_COOKIE['password']; } ?>"  />
                 </div>
                 <div class="form-group clearfix">
                   <div class="custom-control custom-checkbox float-left">
-                    <input type="checkbox" class="custom-control-input" id="customCheck" name="rem" />
+                    <input type="checkbox" class="custom-control-input" name="rem" id="customCheck" 
+                     <?php if(isset($_COOKIE['email'])) { ?>
+                      checked <?php } ?>>
                     <label class="custom-control-label" for="customCheck">Remember me</label>
                   </div>
                   <div class="forgot float-right">
@@ -79,6 +89,12 @@
                 </div>
                 <div class="input-group input-group-lg form-group">
                   <div class="input-group-prepend">
+                    <span class="input-group-text rounded-0"><i class="far fa-user fa-lg fa-fw"></i></span>
+                  </div>
+                  <input type="text" id="username" name="username" class="form-control rounded-0" placeholder="Username" required />
+                </div>
+                <div class="input-group input-group-lg form-group">
+                  <div class="input-group-prepend">
                     <span class="input-group-text rounded-0"><i class="far fa-envelope fa-lg fa-fw"></i></span>
                   </div>
                   <input type="email" id="remail" name="email" class="form-control rounded-0" placeholder="E-Mail" required />
@@ -119,6 +135,7 @@
               <hr class="my-3" />
               <p class="lead text-center text-secondary">To reset your password, enter the registered e-mail adddress and we will send you password reset instructions on your e-mail!</p>
               <form action="#" method="post" class="px-3" id="forgot-form">
+                
                 <div id="forgotAlert"></div>
                 <div class="input-group input-group-lg form-group">
                   <div class="input-group-prepend">

@@ -50,6 +50,66 @@ $(function () {
     }
 
   });
+
+
+  $("#login-btn").click(function(e) {
+    if ($("#login-form")[0].checkValidity()) {
+        e.preventDefault();
+
+        $("#login-btn").val('Please Wait...');
+        $.ajax({
+            url: "assets/php/action.php",
+            method: 'post',
+            data: $("#login-form").serialize() + '&action=login',
+            success: function(response) {
+                console.log(response);
+                $("#login-btn").val('Sign in');
+                if(response === 'login'){
+                  window.location = 'home.php';
+                }
+                else{
+                  $("#loginAlert").html(response);
+                }
+            }
+            
+        });
+    }
+});
+
+
+$("#forgot-btn").click(function(e){
+  if($("#forgot-form")[0].checkValidity()){
+    e.preventDefault();
+
+    $("#forgot-btn").val('Please Wait...');
+
+    $.ajax({
+      url: "assets/php/action.php",
+      method: 'post',
+      data: $("#forgot-form").serialize() + '&action=forgot',
+      success:function(response){
+        console.log(response);
+        $("#forgot-btn").val('Reset Password');
+        $("#forgot-form")[0].reset();
+        
+        // Construye un mensaje legible para el usuario
+        var message = "<ul>";
+        $.each(response, function(key, value) {
+            message += "<li><strong>" + key + ":</strong> " + value + "</li>";
+        });
+        message += "</ul>";
+    
+        $("#forgotAlert").html(message);
+    }
+  
+    });
+    
+  }
+});
+
+
+
+    
   
 
   });
