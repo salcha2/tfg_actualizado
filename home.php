@@ -127,17 +127,19 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-2.0.7/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 <script type="text/javascript">
     $(document).ready(function(){
         $("table").DataTable();
 
-
         //Add New Note Ajax Request
         $("#addNoteBtn").click(function(e){
             if($("#add-note-form")[0].checkValidity()){
                 e.preventDefault();
-
 
                 $("#addNoteBtn").val('Please Wait...');
 
@@ -147,17 +149,26 @@
                     data: $("#add-note-form").serialize()+'&action=add_note',
                     success:function(response){
                         console.log(response);
-                        $("#addNoteBtn").val("Add Note")
+                        $("#addNoteBtn").val("Add Note");
+                        $("#addNoteModal").modal('hide');
+                        // Mostrar la notificación con SweetAlert2
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Note added successfully!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
                     }
                     
                 });
             }
         });
 
-
-
+        //Display All Note of an user
+        
     });
 </script>
+
 
 <script>
 // JavaScript para abrir el modal de agregar nota cuando se hace clic en el botón
@@ -197,6 +208,17 @@ $(document).ready(function(){
         $('#edit_note').val(note);
         $('#edit_note_id').val(noteId);
     });
+
+    function displayAllNotes(){
+            $.ajax({
+                url: 'assets/php/process.php',
+                method: 'post',
+                data: { action: 'display_notes' },
+                success:function(response){
+                    console.log(response);
+                }
+            });
+        }
 
 });
 

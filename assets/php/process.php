@@ -14,4 +14,12 @@
 
         $cuser->add_new_note($users, $nombre, $descripcion);
     }
+
+
+    //Handle Display all notes 
+    if(isset($_POST['action']) && $_POST['action'] == 'display_notes'){
+        $output = '';
+
+        
+    }
 ?>
