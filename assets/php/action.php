@@ -12,10 +12,13 @@ if(isset($_POST['action']) && $_POST['action'] == 'register'){
 
     $hpass = password_hash($pass, PASSWORD_DEFAULT);
 
+    // Generar un token para el nuevo usuario
+    $token = generateToken();
+
     if($user->user_exist($email)){
         echo $user->showMessage('warning', 'This E-Mail is already registered!');
     } else {
-        if($user->register($name, $username, $email, $hpass)){
+        if($user->register($name, $username, $email, $hpass, $token)){ // Pasar el token como argumento
             echo 'register';
             $_SESSION['user'] = $email;
         } else {

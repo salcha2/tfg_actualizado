@@ -1,6 +1,9 @@
 <?php
 
 class Database {
+    const USERNAME = 'salimchaieri51@gmail.com';
+    const PASSWORD ='SOumaya11221+';
+
     private $dsn = "pgsql:host=localhost;dbname=Colombia";
     private $dbuser = "main";
     private $dbpass = "Soum22";

@@ -16,5 +16,28 @@
     $data = $cuser-> currentUser($cemail);
 
 
+    $cid = $data['id'];
+    $cname = $data['name'];
+    $cpass = $data['password'];
+    $cphone = $data['phone'];
+    $cgender = $data['gender'];
+    $cdob = $data['dob'];
+    $cphoto = $data['photo'];
+    $created = $data['created_at'];
+    $verified = $data['verified'];
+    $users = $data['usuario'];
+
+
+    
+
+    $fname = strtok($cname, " ");
+
+    if($verified == 0){
+        $verified = 'Not Verified!';
+    }
+    else{
+        $verified = 'Verified';
+    }
+
 
     ?>

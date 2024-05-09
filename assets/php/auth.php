@@ -55,6 +55,46 @@ class Auth extends Database{
             return false; // Si hay algún error en la ejecución de la consulta, devuelve falso
         }
     }
+
+
+     // Método para obtener las credenciales de correo electrónico de un usuario
+     public function getUserEmailCredentials($email) {
+        $sql = "SELECT email_smtp_username, email_smtp_password FROM users WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+
+    // Add new note
+
+    public function add_new_note($usuario, $nombre, $descripcion){
+        $sql = "INSERT INTO datos4 (usuario, nombre, descripcion) VALUES (:usuario, :nombre, :descripcion)";
+    
+        $stmt = $this->conn->prepare($sql);
+    
+        // Imprimir los valores que se pasarán a la consulta SQL
+        echo "Usuario: $usuario<br>";
+        echo "Nombre: $nombre<br>";
+        echo "Descripción: $descripcion<br>";
+    
+        $stmt->execute(['usuario' => $usuario, 'nombre'=> $nombre , 'descripcion' => $descripcion]);
+    
+        // Verificar si hay errores durante la ejecución de la consulta
+        $errorInfo = $stmt->errorInfo();
+        if ($errorInfo[0] !== '00000') {
+            // Si hay errores, imprimir el mensaje de error
+            echo "Error al ejecutar la consulta: " . $errorInfo[2];
+            return false;
+        }
+    
+        return true;
+    }
+    
+
+
+
     
     
     
