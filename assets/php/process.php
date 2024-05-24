@@ -42,4 +42,20 @@ if (isset($_POST['action']) && $_POST['action'] == 'display_notes') {
         echo json_encode(['notes' => []]);
     }
 }
+
+if (isset($_POST['id'])) {
+    $id = $_POST['id'];
+
+    $row = $cuser -> edit_note($id);
+
+    echo json_encode($row);
+    
+}
+
+
+//Handle UPdate Note of An User Ajax Request
+if(isset($_POST['action']) && $_POST['action'] == 'update_note'){
+    //print_r($_POST);
+}
+
 ?>

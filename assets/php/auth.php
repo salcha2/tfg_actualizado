@@ -140,6 +140,20 @@ public function get_notes($usuario) {
 }
 
 
+// edit Note of an user
+public function edit_note($id){
+    $sql = "SELECT * FROM datos4 WHERE id = :id";
+    $stmt = $this -> conn -> prepare($sql);
+    $stmt -> execute(['id' => $id]);
+
+    $result = $stmt -> fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+
+
+}
+
+
 
 
     

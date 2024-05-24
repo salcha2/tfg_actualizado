@@ -1,6 +1,124 @@
 <!-- Encabezado y otros elementos -->
 <?php require_once 'assets/php/header.php'; ?>
 
+
+<!-- Estilos CSS -->
+<style>
+    /* Agrega tus estilos aquí */
+    /* Estilos CSS */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Cambio de color de fondo */
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.card-header {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Estilos para la tabla */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+.table thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para los botones */
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* Estilos para el modal */
+.modal-content {
+    border-radius: 8px;
+}
+
+.modal-header {
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-body,
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Estilos para los botones dentro de la tabla */
+.btn-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+    /* Agrega más estilos según lo necesites */
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -27,35 +145,52 @@
         <div class="card-body">
             <!-- Contenido de la tabla -->
             <div class="table-responsive" id="showNote">
-                <table class="table table-striped text-center">
+                <table class="table table-striped table-sm text-center" id="noteTable">
                     <!-- Cabecera de la tabla -->
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Title</th>
-                            <th>Note</th>
+                            <th>nombre</th>
+                            <th>descripcion</th>
+                            <th>result_vulnerability</th>
+
+                            <th>result_risk</th>
+                            <th>result_functionality</th>
+                            <th>id_v1</th>
+                            <th>id_v2</th>
+                            <th>id_v3</th>
+                            <th>id_v4</th>
+                            <th>id_v5</th>
+                            <th>id_v6</th>
+                            <th>id_v7</th>
+                            <th>id_v8</th>
+                            <th>id_v9</th>
+                            <th>id_v10</th>
+                            <th>id_v11</th>
+                            <th>id_v12</th>
+                            <th>id_v13</th>
+                            <th>id_v14</th>
+                            <th>id_v15</th>
+                            <th>id_v16</th>
+                            <th>id_v17</th>
+                            <th>id_v18</th>
+                            <th>id_v19</th>
+                            <th>id_v20</th>
+                            <th>id_v21</th>
+
+                            <th>coordenadas</th>
+                            <th>created_at</th>
+                            <th>updated_at</th>
+
+
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <!-- Cuerpo de la tabla (solo un ejemplo) -->
+                    <!-- Cuerpo de la tabla (se generará dinámicamente con jQuery) -->
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Web Design</td>
-                            <td>Lorem ipsum dolor sit amet</td>
-                            <td>
-                                <!-- Acciones (solo un ejemplo) -->
-                                <a href="#" title="View Details" class="text-success infoBtn">
-                                    <i class="fas fa-info-circle fa-lg"></i>
-                                </a>
-                                <a href="#" title="Edit Note" class="text-primary editBtn">
-                                    <i class="fas fa-edit fa-lg"></i>
-                                </a>
-                                <a href="#" title="Delete Note" class="text-danger deleteBtn">
-                                    <i class="fas fa-trash-alt fa-lg"></i>
-                                </a>
-                            </td>
-                        </tr>
+
+                    
+
                     </tbody>
                 </table>
             </div>
@@ -163,66 +298,148 @@
             }
         });
 
-        // Display All Notes of a user
-        function displayAllNotes() {
-            $.ajax({
-                url: 'assets/php/process.php',
-                method: 'post',
-                data: { action: 'display_notes' },
-                success: function(response) {
-                    console.log("Response from server:", response);
-                    try {
-                        var jsonResponse = JSON.parse(response);
-                        if (jsonResponse.debug) {
-                            console.log("Debug messages:", jsonResponse.debug);
-                        }
-                        if (jsonResponse.notes) {
-                            console.log("User notes:", jsonResponse.notes);
-                            let notesHtml = '';
-                            $.each(jsonResponse.notes, function(index, note) {
-                                notesHtml += '<tr>';
-                                notesHtml += '<td>' + (index + 1) + '</td>';
-                                notesHtml += '<td>' + note.title + '</td>';
-                                notesHtml += '<td>' + note.note + '</td>';
-                                notesHtml += '<td>';
-                                notesHtml += '<a href="#" title="View Details" class="text-success infoBtn"><i class="fas fa-info-circle fa-lg"></i></a>&nbsp;';
-                                notesHtml += '<a href="#" title="Edit Note" class="text-primary editBtn"><i class="fas fa-edit fa-lg"></i></a>&nbsp;';
-                                notesHtml += '<a href="#" title="Delete Note" class="text-danger deleteBtn"><i class="fas fa-trash-alt fa-lg"></i></a>';
-                                notesHtml += '</td>';
-                                notesHtml += '</tr>';
-                            });
-                            $('#showNote tbody').html(notesHtml);
-                        } else {
-                            console.log("No notes found.");
-                            $('#showNote tbody').html('<tr><td colspan="4">No notes found</td></tr>');
-                        }
-                    } catch (e) {
-                        console.error("Error parsing JSON response:", e);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error("AJAX error: ", status, error);
+        
+     // Display All Notes of a user
+function displayAllNotes() {
+    $.ajax({
+        url: 'assets/php/process.php',
+        method: 'post',
+        data: { action: 'display_notes' },
+        success: function(response) {
+            console.log("Response from server:", response);
+            try {
+                var jsonResponse = JSON.parse(response);
+                if (jsonResponse.debug) {
+                    console.log("Debug messages:", jsonResponse.debug);
                 }
-            });
+                if (jsonResponse.notes) {
+                    console.log("User notes:", jsonResponse.notes);
+                    let notesHtml = '';
+                    $.each(jsonResponse.notes, function(index, note) {
+                        notesHtml += '<tr>';
+                        notesHtml += '<td>' + (index + 1) + '</td>';
+                        notesHtml += '<td>' + note.nombre + '</td>';
+                        notesHtml += '<td>' + note.descripcion + '</td>';
+                        notesHtml += '<td>' + note.result_vulnerability + '</td>';
+                        notesHtml += '<td>' + note.result_risk + '</td>';
+                        notesHtml += '<td>' + note.result_functionality + '</td>';
+                        notesHtml += '<td>' + note.id_v1 + '</td>';
+                        notesHtml += '<td>' + note.id_v2 + '</td>';
+                        notesHtml += '<td>' + note.id_v3 + '</td>';
+                        notesHtml += '<td>' + note.id_v4 + '</td>';
+                        notesHtml += '<td>' + note.id_v5 + '</td>';
+                        notesHtml += '<td>' + note.id_v6 + '</td>';
+                        notesHtml += '<td>' + note.id_v7 + '</td>';
+                        notesHtml += '<td>' + note.id_v8 + '</td>';
+                        notesHtml += '<td>' + note.id_v9 + '</td>';
+                        notesHtml += '<td>' + note.id_v10 + '</td>';
+                        notesHtml += '<td>' + note.id_v11 + '</td>';
+                        notesHtml += '<td>' + note.id_v12 + '</td>';
+                        notesHtml += '<td>' + note.id_v13 + '</td>';
+                        notesHtml += '<td>' + note.id_v14 + '</td>';
+                        notesHtml += '<td>' + note.id_v15 + '</td>';
+                        notesHtml += '<td>' + note.id_v16 + '</td>';
+                        notesHtml += '<td>' + note.id_v17 + '</td>';
+                        notesHtml += '<td>' + note.id_v18 + '</td>';
+                        notesHtml += '<td>' + note.id_v19 + '</td>';
+                        notesHtml += '<td>' + note.id_v20 + '</td>';
+                        notesHtml += '<td>' + note.id_v21 + '</td>';
+                        notesHtml += '<td>' + note.coordenadas + '</td>';
+                        notesHtml += '<td>' + note.created_at + '</td>';
+                        notesHtml += '<td>' + note.updated_at + '</td>';
+                        notesHtml += '<td>';
+                        notesHtml += '<div class="btn-group" role="group">';
+                        notesHtml += '<button type="button" class="btn btn-success infoBtn" title="View Details"><i class="fas fa-info-circle fa-lg"></i></button>';
+                        notesHtml += '<button type="button" class="btn btn-primary editBtn" data-id="' + note.id + '" title="Edit Note"><i class="fas fa-edit fa-lg"></i></button>';
+                        notesHtml += '<button type="button" class="btn btn-danger deleteBtn" title="Delete Note"><i class="fas fa-trash-alt fa-lg"></i></button>';
+                        notesHtml += '</div>';
+                        notesHtml += '</td>';
+                        notesHtml += '</tr>';
+                    });
+                    $('#showNote tbody').html(notesHtml);
+                    
+                } else {
+                    console.log("No notes found.");
+                    $('#showNote tbody').html('<tr><td colspan="4">No notes found</td></tr>');
+                }
+            } catch (e) {
+                console.error("Error parsing JSON response:", e);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error: ", status, error);
         }
+    });
+}
+
 
         // JavaScript para abrir el modal de agregar nota cuando se hace clic en el botón
         $('#openAddNoteModalBtn').click(function() {
             $('#addNoteModal').modal('show');
         });
 
-        // JavaScript para abrir el modal de editar nota y cargar los datos en el formulario
-        $(document).on('click', '.editBtn', function() {
-            $('#editNoteModal').modal('show');
-            // Obtener los datos de la nota actual
-            var title = $(this).closest('tr').find('td:eq(1)').text();
-            var note = $(this).closest('tr').find('td:eq(2)').text();
-            var noteId = $(this).closest('tr').find('td:eq(0)').text();
-            // Llenar el formulario de edición con los datos de la nota actual
-            $('#edit_title').val(title);
-            $('#edit_note').val(note);
-            $('#edit_note_id').val(noteId);
+        // // JavaScript para abrir el modal de editar nota y cargar los datos en el formulario
+        // $(document).on('click', '.editBtn', function() {
+        //     $('#editNoteModal').modal('show');
+        //     // Obtener los datos de la nota actual
+        //     var title = $(this).closest('tr').find('td:eq(1)').text();
+        //     var note = $(this).closest('tr').find('td:eq(2)').text();
+        //     var noteId = $(this).closest('tr').find('td:eq(0)').text();
+        //     // Llenar el formulario de edición con los datos de la nota actual
+        //     $('#edit_title').val(title);
+        //     $('#edit_note').val(note);
+        //     $('#edit_note_id').val(noteId);
+        // });
+
+        //EDIT NOTE OF AN USER AJAX REQUEST
+
+        $(document).on('click', '.editBtn', function(e) {
+    e.preventDefault();
+    $('#editNoteModal').modal('show');
+
+    var edit_id = $(this).data('id'); // Obtiene el ID del atributo data-id
+    //console.log('ID del registro a editar:', edit_id); // Imprime el ID en la consola para verificar
+
+    // Aquí puedes cargar los datos de la nota en el formulario de edición usando edit_id
+    $.ajax({
+        url: 'assets/php/process.php',
+        method: 'post',
+        data: { action: 'get_note', id: edit_id },
+        success: function(response) {
+            
+
+
+            //console.log(data);
+            // Suponiendo que el servidor devuelve la nota como un objeto JSON
+            var note = JSON.parse(response);
+            $('#edit_title').val(note.nombre);
+            $('#edit_note').val(note.descripcion);
+            $('#edit_note_id').val(note.id);
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error: ", status, error);
+        }
+    });
+});
+
+//Update Note of An User Ajax Request
+$("#editNoteBtn").click(function(e){
+    if($("#edit-note-form")[0].checkValidity()){
+        e.preventDefault();
+
+
+        $.ajax({
+            url: 'assets/php/process.php',
+            method: 'post',
+            data: $("#edit-note-form").serialize()+"&action=update_note",
+            success:function(response){
+                console.log(response);
+            }
         });
+    }
+})
+
+
 
         // Inicializar la visualización de todas las notas
         displayAllNotes();

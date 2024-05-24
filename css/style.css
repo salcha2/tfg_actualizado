@@ -1,0 +1,9 @@
+/* Ajustar la altura de las filas de la tabla */
+table.table tbody tr td {
+    line-height: 1.5; /* Ajusta esta altura según tus necesidades */
+}
+
+/* Hacer que los botones se vean en línea horizontalmente */
+.btn-group {
+    display: flex;
+}
