@@ -55,7 +55,7 @@
         <li><a href="contacto.html">Contacto</a></li>
         <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
-                <i class="fas fa-user-cog"></i> &nbsp;Hi! <?= $cname; ?>
+                <i class="fas fa-user-cog"></i> &nbsp;Hi! <?= $users; ?>
             </a>
             <div class="dropdown-menu">
                 <a href="#" class="dropdown-item"><i class="fas fa-cog"></i>&nbsp;Setting</a>

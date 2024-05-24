@@ -25,10 +25,11 @@
     $cphoto = $data['photo'];
     $created = $data['created_at'];
     $verified = $data['verified'];
-    $users = $data['usuario'];
+    $users = $data['username'];
 
 
-    
+    $_SESSION['usuario'] = $users;
+
 
     $fname = strtok($cname, " ");
 

@@ -3,6 +3,7 @@
 require_once 'config.php';
 
 
+
 class Auth extends Database{
 
     public function register($name, $username, $email, $password){
@@ -91,7 +92,53 @@ class Auth extends Database{
     
         return true;
     }
+
+
+    // Fetch All Note Of An user
+// Definición de la función get_notes
+public function get_notes($usuario) {
+    // Verificar la conexión a la base de datos
+    if ($this->conn) {
+        error_log("Conexión a la base de datos establecida.");
+    } else {
+        error_log("Error de conexión a la base de datos.");
+        return [];
+    }
+
+    // Preparar la consulta SQL
+    $sql = "SELECT * FROM datos4 WHERE usuario = :usuario";
+    $stmt = $this->conn->prepare($sql);
     
+    // Imprimir el valor del usuario
+    error_log("Usuario: $usuario");
+
+    // Verificar si el valor del usuario no está vacío
+    if (empty($usuario)) {
+        error_log("El valor del usuario está vacío.");
+        return [];
+    }
+
+    // Ejecutar la consulta SQL
+    if ($stmt->execute(['usuario' => $usuario])) {
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Agregar mensaje de depuración
+        error_log("Consulta SQL ejecutada. Resultado: " . print_r($result, true));
+
+        // Verificar si la consulta devolvió resultados
+        if (empty($result)) {
+            error_log("No se encontraron notas para el usuario: $usuario");
+        }
+
+        return $result;
+    } else {
+        // Agregar mensaje de depuración en caso de error en la ejecución de la consulta
+        $errorInfo = $stmt->errorInfo();
+        error_log("Error en la ejecución de la consulta SQL: " . $errorInfo[2]);
+        return [];
+    }
+}
+
 
 
 

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12">
             <!-- Mensaje de alerta -->
-            <?php if($verified == 'Non Verified!'): ?>               
+            <?php if ($verified == 'Non Verified!'): ?>
                 <div class="alert alert-danger alert-dismissible text-center mt-2 m-0">
                     <button class="close" type="button" data-dismiss="alert">&times;</button>
                     <strong>Your E-mail is not verified! We've sent you an E-mail Verification link on your E-mail, check & verify now!</strong>
@@ -83,7 +83,6 @@
                         <textarea name="note" id="note" class="form-control form-control-lg" placeholder="Write Your Note Here..." rows="6" required></textarea>
                     </div>
                     <div class="form-group">
-                        <!-- Cambia el tipo de botón a "button" -->
                         <button id="addNoteBtn" class="btn btn-success btn-block btn-lg">Add Note</button>
                     </div>
                 </form>
@@ -91,7 +90,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal para editar una nota -->
 <div id="editNoteModal" class="modal" tabindex="-1" role="dialog">
@@ -130,15 +128,13 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8/sweetalert2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
         $("table").DataTable();
 
-        //Add New Note Ajax Request
-        $("#addNoteBtn").click(function(e){
-            if($("#add-note-form")[0].checkValidity()){
+        // Add New Note Ajax Request
+        $("#addNoteBtn").click(function(e) {
+            if ($("#add-note-form")[0].checkValidity()) {
                 e.preventDefault();
 
                 $("#addNoteBtn").val('Please Wait...');
@@ -146,8 +142,8 @@
                 $.ajax({
                     url: 'assets/php/process.php',
                     method: 'post',
-                    data: $("#add-note-form").serialize()+'&action=add_note',
-                    success:function(response){
+                    data: $("#add-note-form").serialize() + '&action=add_note',
+                    success: function(response) {
                         console.log(response);
                         $("#addNoteBtn").val("Add Note");
                         $("#addNoteModal").modal('hide');
@@ -158,72 +154,80 @@
                             showConfirmButton: false,
                             timer: 1500
                         });
+                        displayAllNotes(); // Refresh the notes display
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX error: ", status, error);
                     }
-                    
                 });
             }
         });
 
-        //Display All Note of an user
-        
-    });
-</script>
-
-
-<script>
-// JavaScript para abrir el modal de agregar nota cuando se hace clic en el botón
-$(document).ready(function(){
-    $('#openAddNoteModalBtn').click(function(){
-        $('#addNoteModal').modal('show');
-    });
-
-    // AJAX para enviar el formulario al hacer clic en el botón "Add Note" dentro del modal
-    // $('#addNoteBtn').click(function(e){
-    //     if($("#add-note-form")[0].checkValidity()){
-    //         e.preventDefault();
-    //         $("#addNoteBtn").val('Please Wait...');
-
-    //         $.ajax({
-    //             url: 'assets/php/process.php',
-    //             method: 'post',
-    //             data: $("#add-note-form").serialize()+'&action=add_note',
-    //             success:function(response){
-                    
-    //             }
-    //         });
-    //     }
-    // });
-
-    // JavaScript para abrir el modal de editar nota y cargar los datos en el formulario
-    $('.editBtn').click(function(){
-        $('#editNoteModal').modal('show');
-        
-        // Obtener los datos de la nota actual
-        var title = $(this).closest('tr').find('td:eq(1)').text();
-        var note = $(this).closest('tr').find('td:eq(2)').text();
-        var noteId = $(this).closest('tr').find('td:eq(0)').text();
-        
-        // Llenar el formulario de edición con los datos de la nota actual
-        $('#edit_title').val(title);
-        $('#edit_note').val(note);
-        $('#edit_note_id').val(noteId);
-    });
-
-    function displayAllNotes(){
+        // Display All Notes of a user
+        function displayAllNotes() {
             $.ajax({
                 url: 'assets/php/process.php',
                 method: 'post',
                 data: { action: 'display_notes' },
-                success:function(response){
-                    console.log(response);
+                success: function(response) {
+                    console.log("Response from server:", response);
+                    try {
+                        var jsonResponse = JSON.parse(response);
+                        if (jsonResponse.debug) {
+                            console.log("Debug messages:", jsonResponse.debug);
+                        }
+                        if (jsonResponse.notes) {
+                            console.log("User notes:", jsonResponse.notes);
+                            let notesHtml = '';
+                            $.each(jsonResponse.notes, function(index, note) {
+                                notesHtml += '<tr>';
+                                notesHtml += '<td>' + (index + 1) + '</td>';
+                                notesHtml += '<td>' + note.title + '</td>';
+                                notesHtml += '<td>' + note.note + '</td>';
+                                notesHtml += '<td>';
+                                notesHtml += '<a href="#" title="View Details" class="text-success infoBtn"><i class="fas fa-info-circle fa-lg"></i></a>&nbsp;';
+                                notesHtml += '<a href="#" title="Edit Note" class="text-primary editBtn"><i class="fas fa-edit fa-lg"></i></a>&nbsp;';
+                                notesHtml += '<a href="#" title="Delete Note" class="text-danger deleteBtn"><i class="fas fa-trash-alt fa-lg"></i></a>';
+                                notesHtml += '</td>';
+                                notesHtml += '</tr>';
+                            });
+                            $('#showNote tbody').html(notesHtml);
+                        } else {
+                            console.log("No notes found.");
+                            $('#showNote tbody').html('<tr><td colspan="4">No notes found</td></tr>');
+                        }
+                    } catch (e) {
+                        console.error("Error parsing JSON response:", e);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX error: ", status, error);
                 }
             });
         }
 
-});
+        // JavaScript para abrir el modal de agregar nota cuando se hace clic en el botón
+        $('#openAddNoteModalBtn').click(function() {
+            $('#addNoteModal').modal('show');
+        });
 
+        // JavaScript para abrir el modal de editar nota y cargar los datos en el formulario
+        $(document).on('click', '.editBtn', function() {
+            $('#editNoteModal').modal('show');
+            // Obtener los datos de la nota actual
+            var title = $(this).closest('tr').find('td:eq(1)').text();
+            var note = $(this).closest('tr').find('td:eq(2)').text();
+            var noteId = $(this).closest('tr').find('td:eq(0)').text();
+            // Llenar el formulario de edición con los datos de la nota actual
+            $('#edit_title').val(title);
+            $('#edit_note').val(note);
+            $('#edit_note_id').val(noteId);
+        });
+
+        // Inicializar la visualización de todas las notas
+        displayAllNotes();
+    });
 </script>
-
 
 </body>
 </html>
