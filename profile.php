@@ -132,7 +132,7 @@ echo '</script>';
             Change Password
         </div>
         <div class="card-body">
-            <form action="#" method="post" class="px-3 mt-2">
+            <form action="#" method="post" class="px-3 mt-2" id="change-pass-form">
                 <div class="form-group">
                     <label for="curpass">Enter Your Current Password</label>
                     <input type="password" name="curpass" placeholder="Current Password" class="form-control form-control-lg" id="curpass" required minlength="5">
@@ -143,10 +143,16 @@ echo '</script>';
                     <input type="password" name="newpass" placeholder="New Password" class="form-control form-control-lg" id="newpass" required minlength="5">
                 </div>
 
+               
                 <div class="form-group">
                     <label for="cnewpass">Enter New Password</label>
                     <input type="password" name="newpass" placeholder="Confirm New Password" class="form-control form-control-lg" id="cnewpass" required minlength="5">
                 </div>
+
+                <div class="form-group">
+                    <p id="changepassError" class="text-danger"></p>
+                </div>
+
 
                 <div class="form-group text-center">
     <input type="submit" name="changepass" value="Change Password" class="btn btn-success btn-lg rounded-pill" id="changePassBtn">
@@ -178,24 +184,46 @@ echo '</script>';
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        // Profile Update Ajax Request
-        $("#profile-update-form").submit(function(e){
-            e.preventDefault();
-            $.ajax({
-                url: 'assets/php/process.php',
-                method: 'post',
-                processData: false,
-                contentType: false,
-                cache: false,
-                data: new FormData(this),
-                success:function(response){
-                    console.log(response);
-                }
-            });
+$(document).ready(function(){
+    // Profile Update Ajax Request
+    $("#profile-update-form").submit(function(e){
+        e.preventDefault();
+        console.log("Submitting profile update form...");
+
+        $.ajax({
+            url: 'assets/php/process.php',
+            method: 'post',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: new FormData(this),
+            success: function(response){
+                //console.log("Profile update successful:", response);
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error("Error submitting profile update form:", xhr.responseText);
+            }
         });
     });
+
+    //Change Password Ajax Request
+    $("#changePassBtn").click(function(e){
+       if($("#change-pass-form")[0].checkValidity()){
+        e.preventDefault();
+        $("#changePassBtn").val('Please Wait...');
+
+        if($("#newpass").val() != $("#cnewpass").val()){
+            $("#changepassError").text('* Password did not matched!');
+            $("#changePassBtn").val('Change Password');
+
+        }
+       } 
+    });
+
+});
 </script>
+
 
 
 </body>

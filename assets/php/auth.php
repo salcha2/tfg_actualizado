@@ -201,13 +201,16 @@ public function get_note_details($id){
 
 //Update profile of an user
 
-public function update_profile($name, $gender, $dob, $phone, $photo, $id){
-    $sql = "UPDATE users SET name = :name, gender = :gender, dob = :dob , phone = :phone, photo = :photo WHERE id = :id AND deleted != 0";
-$stmt = $this -> conn -> prepare($sql);
-$stmt -> execute(['name' => $name, 'gener' => $gender, 'dob' => $dob, 'phone' => $phone, 'photo' => $photo, 'id' => $id]);
-return true;
-
+public function update_profile($name, $gender, $dob, $phone, $photo, $id) {
+    // Asegurarse de que la condición de deleted sea coherente con la lógica de la aplicación
+    $sql = "UPDATE users SET name = :name, gender = :gender, dob = :dob , telefono = :phone, photo = :photo WHERE id = :id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute(['name' => $name, 'gender' => $gender, 'dob' => $dob, 'phone' => $phone, 'photo' => $photo, 'id' => $id]);
+    return $stmt->rowCount() > 0;
 }
+
+
+
 
     
     

@@ -19,7 +19,7 @@
     $cid = $data['id'];
     $cname = $data['name'];
     $cpass = $data['password'];
-    $cphone = $data['phone'];
+    $cphone = $data['telefono'];
     $cgender = $data['gender'];
     $cdob = $data['dob'];
     $cphoto = $data['photo'];
