@@ -116,6 +116,11 @@ if(isset($_POST['info_id'])){
 }
 
 
+//Handle ajax request for profile update
 
+if(isset($_FILES['image'])){
+    print_r($_FILES);
+    print_r($_POST);
+}
 
 ?>

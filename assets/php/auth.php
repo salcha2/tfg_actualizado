@@ -7,11 +7,12 @@ require_once 'config.php';
 class Auth extends Database{
 
     public function register($name, $username, $email, $password){
-        $sql = "INSERT INTO users (name, username, email, password) VALUES (:name, :username, :email, :pass)";
+        $sql = "INSERT INTO users (name, username, email, password, created_at) VALUES (:name, :username, :email, :pass, CURRENT_TIMESTAMP)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute(['name'=>$name, 'username'=>$username, 'email'=>$email, 'pass'=>$password]);
+        $stmt->execute(['name' => $name, 'username' => $username, 'email' => $email, 'pass' => $password]);
         return true;
     }
+    
 
     //Check if user already registered
     public function user_exist($email){
@@ -195,6 +196,17 @@ public function get_note_details($id){
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $result;
+}
+
+
+//Update profile of an user
+
+public function update_profile($name, $gender, $dob, $phone, $photo, $id){
+    $sql = "UPDATE users SET name = :name, gender = :gender, dob = :dob , phone = :phone, photo = :photo WHERE id = :id AND deleted != 0";
+$stmt = $this -> conn -> prepare($sql);
+$stmt -> execute(['name' => $name, 'gener' => $gender, 'dob' => $dob, 'phone' => $phone, 'photo' => $photo, 'id' => $id]);
+return true;
+
 }
 
     
