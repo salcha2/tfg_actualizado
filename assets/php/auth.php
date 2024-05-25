@@ -154,9 +154,49 @@ public function edit_note($id){
 }
 
 
+//UPDATE nOTE OF AN USER
+public function note_exists($id) {
+    $sql = "SELECT COUNT(*) FROM datos4 WHERE id = :id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute(['id' => $id]);
+    return $stmt->fetchColumn() > 0;
+}
+
+public function update_note($id, $nombre, $descripcion) {
+    try {
+        $sql = "UPDATE datos4 SET nombre = :nombre, descripcion = :descripcion, updated_at = NOW() WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['nombre' => $nombre, 'descripcion' => $descripcion, 'id' => $id]);
+        return true;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 
 
-    
+//DELETE A NOTE of an user
+
+public function delete_note($id){
+    $sql = "DELETE FROM datos4 WHERE id = :id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute(['id' => $id]);
+
+    return true;
+}
+
+
+    // Obtener detalles de una nota
+public function get_note_details($id){
+    $sql = "SELECT * FROM datos4 WHERE id = :id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute(['id' => $id]);
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result;
+}
+
     
     
     

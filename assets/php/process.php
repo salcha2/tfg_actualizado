@@ -53,9 +53,69 @@ if (isset($_POST['id'])) {
 }
 
 
-//Handle UPdate Note of An User Ajax Request
-if(isset($_POST['action']) && $_POST['action'] == 'update_note'){
-    //print_r($_POST);
+
+if (isset($_POST['action']) && $_POST['action'] == 'update_note') {
+    // Depurar datos recibidos
+    print_r($_POST); 
+
+    // Verificación y sanitización de entradas
+    if (!empty($_POST['note_id']) && !empty($_POST['edit_title']) && !empty($_POST['edit_note'])) {
+        $id = $cuser->test_input($_POST['note_id']);
+        $nombre = $cuser->test_input($_POST['edit_title']);
+        $descripcion = $cuser->test_input($_POST['edit_note']);
+
+        // Verificación de la existencia del ID en la base de datos
+        if ($cuser->note_exists($id)) {
+            // Intentar actualizar la nota
+            $update_result = $cuser->update_note($id, $nombre, $descripcion);
+            if ($update_result) {
+                echo json_encode(["status" => "success", "message" => "Note updated successfully."]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Failed to update note."]);
+            }
+        } else {
+            echo json_encode(["status" => "error", "message" => "Note with specified ID does not exist."]);
+        }
+    } else {
+        echo json_encode(["status" => "error", "message" => "All fields are required."]);
+    }
 }
+
+
+//HAndle delete a note of an User ajax request
+
+
+if (isset($_POST['del_id'])) {
+    $id = $_POST['del_id'];
+    print_r($_POST); // Para depuración, verifica que el ID se está recibiendo correctamente
+
+    $cuser->delete_note($id);
+}
+
+
+
+//Handle display detail note of an user request
+if(isset($_POST['info_id'])){
+    $id = $_POST['info_id'];
+
+    // Mensaje de depuración
+    echo "Info ID recibido: " . $id;
+
+    // Obtener detalles de la nota utilizando la nueva función
+    $row = $cuser->get_note_details($id);
+
+    // Mensaje de depuración
+    echo "Fila recuperada de la base de datos: ";
+    print_r($row);
+
+    if ($row) {
+        echo json_encode($row);
+    } else {
+        echo json_encode(["error" => "No se encontró la nota con el ID especificado."]);
+    }
+}
+
+
+
 
 ?>

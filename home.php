@@ -260,7 +260,7 @@ body {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-2.0.7/datatables.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@8/sweetalert2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript">
@@ -349,14 +349,21 @@ function displayAllNotes() {
                         notesHtml += '<td>' + note.updated_at + '</td>';
                         notesHtml += '<td>';
                         notesHtml += '<div class="btn-group" role="group">';
-                        notesHtml += '<button type="button" class="btn btn-success infoBtn" title="View Details"><i class="fas fa-info-circle fa-lg"></i></button>';
+                        notesHtml += '<button type="button" class="btn btn-success infoBtn" data-id="' + note.id + '" title="View Details"><i class="fas fa-info-circle fa-lg"></i></button>';
                         notesHtml += '<button type="button" class="btn btn-primary editBtn" data-id="' + note.id + '" title="Edit Note"><i class="fas fa-edit fa-lg"></i></button>';
-                        notesHtml += '<button type="button" class="btn btn-danger deleteBtn" title="Delete Note"><i class="fas fa-trash-alt fa-lg"></i></button>';
+                        notesHtml += '<button type="button" class="btn btn-danger deleteBtn" data-id="' + note.id + '"  title="Delete Note"><i class="fas fa-trash-alt fa-lg"></i></button>';
                         notesHtml += '</div>';
                         notesHtml += '</td>';
                         notesHtml += '</tr>';
                     });
                     $('#showNote tbody').html(notesHtml);
+
+
+                     // Agregar la lógica de redirección al hacer clic en el botón de detalles
+                     $('.infoBtn').click(function() {
+                        var noteId = $(this).data('id');
+                        window.location.href = 'detail_view.php?id=' + noteId;
+                    });
                     
                 } else {
                     console.log("No notes found.");
@@ -422,22 +429,116 @@ function displayAllNotes() {
     });
 });
 
-//Update Note of An User Ajax Request
 $("#editNoteBtn").click(function(e){
     if($("#edit-note-form")[0].checkValidity()){
         e.preventDefault();
-
-
         $.ajax({
             url: 'assets/php/process.php',
             method: 'post',
             data: $("#edit-note-form").serialize()+"&action=update_note",
             success:function(response){
                 console.log(response);
+                Swal.fire({
+                            icon: 'success',
+                            title: 'Note edited successfully!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                $("#edit-note-form")[0].reset();
+                $("#editNoteModal").modal('hide');
+                displayAllNotes();
+
+            },
+            error: function(xhr, status, error){
+                console.log("Error: " + error);
+                console.log("Status: " + status);
+                console.dir(xhr);
             }
         });
     }
-})
+});
+
+
+// DELETE NOTE OF AN USER AJAX REQUEST
+$("body").on("click", ".deleteBtn", function(e){
+    e.preventDefault();
+    var del_id = $(this).data('id'); // Use .data('id') to get the data-id attribute value
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'assets/php/process.php',
+                method: 'post',
+                data: { del_id: del_id },
+                success:function(response){
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your register has been deleted.",
+                        icon: "success"
+                    });
+                    displayAllNotes();
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX error: ", status, error);
+                }
+            });
+        }
+    });
+});
+
+$("body").on("click", ".infoBtn", function(e){
+    e.preventDefault();
+
+    var info_id = $(this).data('id'); // Obtener el ID del atributo data-id
+
+    $.ajax({
+        url: 'assets/php/process.php',
+        method: 'post',
+        data: { info_id: info_id }, // Pasar el ID como info_id en la solicitud
+        success: function(response){
+            console.log("Respuesta recibida del servidor:");
+            console.log(response);
+            
+            // Verificar si la respuesta está vacía o no es válida
+            if(response.trim() === "") {
+                console.log("La respuesta está vacía o en un formato no válido.");
+                return;
+            }
+            
+            var data = JSON.parse(response);
+            
+            // Mostrar la información en SweetAlert
+            Swal.fire({
+                title: '<strong>Detalles de la Nota</strong>',
+                icon: 'info',
+                html: '<div id="noteDetails">' +
+                          '<p><strong>ID:</strong> ' + data.id + '</p>' +
+                          '<p><strong>Título:</strong> ' + data.nombre + '</p>' +
+                          '<p><strong>Fecha de Creación:</strong> ' + data.created_at + '</p>' +
+                          '<p><strong>Fecha de Actualización:</strong> ' + data.updated_at + '</p>' +
+                      '</div>',
+                showCloseButton: true,
+                confirmButtonText: 'Cerrar'
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error en la solicitud AJAX:", status, error);
+        }
+    });
+});
+
+
+
+
+
+
 
 
 
