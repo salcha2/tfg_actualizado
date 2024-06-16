@@ -19,18 +19,21 @@ formulario.addEventListener('submit', function(e){
     .then(res => res.json())
     .then(data => {
         console.log(data);
-        if (data === 'error'){
+        if (data.status === 'error'){
             respuesta.innerHTML = `
                 <div class="alert alert-danger" role="alert">
                     Llena todos los campos
                 </div> 
             `;
-        } else {
+        } else if (data.status === 'success') {
             respuesta.innerHTML = `
                 <div class="alert alert-primary" role="alert">
-                    ${data}
+                    ${data.message}
                 </div> 
             `;
+            // Otras acciones adicionales después de una inserción exitosa
+            //formulario.reset(); // Limpia el formulario
+            // Otras acciones adicionales
         }
     })
     .catch(error => {

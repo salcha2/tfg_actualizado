@@ -1,5 +1,4 @@
 <?php
-
 // Verifica si se han recibido datos del formulario mediante el método POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     session_start();
@@ -54,7 +53,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Ejecuta la consulta con los valores de los campos del formulario
                 $stmt->execute([$result_vulnerability, $result_risk, $result_functionality, $id_v1, $id_v2, $id_v3, $id_v4, $id_v5, $id_v6, $id_v7, $id_v8, $id_v9, $id_v10, $id_v11, $id_v12, $id_v13, $id_v14, $id_v15, $id_v16, $id_v17, $id_v18, $id_v19, $id_v20, $id_v21, $longitud, $latitud, $usuario]);
                 
-                echo "Los datos se han insertado correctamente en la base de datos";
+                // Envía una respuesta JSON de éxito
+                header('Content-Type: application/json');
+                echo json_encode(['status' => 'success', 'message' => 'Los datos se han insertado correctamente en la base de datos']);
+                exit;
             } catch (PDOException $e) {
                 // Si ocurre un error en la conexión o en la consulta, mostrar el mensaje de error
                 echo "Error: " . $e->getMessage();
@@ -62,5 +64,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
 ?>
