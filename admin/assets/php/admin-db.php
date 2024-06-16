@@ -62,5 +62,17 @@ public function fetchAllNotes(){
  return $result;
 }
 
+
+//Fetch all users drom db
+
+public function exportAllUsers(){
+    $sql = "SELECT * FROM users";
+    $stmt = $this -> conn -> prepare($sql);
+    $stmt -> execute();
+
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
 }
 ?>
