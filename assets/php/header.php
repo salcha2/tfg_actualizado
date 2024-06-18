@@ -2,7 +2,6 @@
     require_once 'assets/php/session.php';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,54 +23,52 @@
         }
 
         .dropdown-item {
-    padding: 10px 20px; /* Puedes ajustar estos valores según tus preferencias */
-}
+            padding: 10px 20px; /* Puedes ajustar estos valores según tus preferencias */
+        }
     </style>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151025138-1"></script>
-<link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151025138-1"></script>
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
 
     <!-- Add custom CSS here -->
     <link href="css/art-risk.css?v=1" type="text/css" rel="stylesheet">
   </head>
   <body>
-  <nav class="navbar navbar-default" role="navigation">
-    <!--<a class="navbar-brand" href="index.php"><i class="fas fa-code fa-lg"></i>&nbsp;&nbsp;Code </a>-->
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">Art-Risk</a>
-        </div>
+    <div class="brand">Art-Risk</div>
+    <div class="address-bar">Inteligencia artificial aplicada a la conservación preventiva de edificios patrimoniales</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="guia.html">Guia</a></li>
-        <li><a href="herramienta.html">Herramienta</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
-                <i class="fas fa-user-cog"></i> &nbsp;Hi! <?= $users; ?>
-            </a>
-            <div class="dropdown-menu">
-                <a href="#" class="dropdown-item"><i class="fas fa-cog"></i>&nbsp;Setting</a>
-                <a href="profile.php" class="dropdown-item"><i class="fas fa-user-circle"></i>&nbsp;Profile</a>
-
-                <a href="assets/php/logout.php" class="dropdown-item"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
-
-
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Art-Risk</a>
             </div>
-        </li>
-    </ul>
-</div>
 
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="guia.html">Guia</a></li>
+                    <li><a href="herramienta.php">Herramienta</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+                            <i class="fas fa-user-cog"></i> &nbsp;Hi! <?= $users; ?>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item"><i class="fas fa-cog"></i>&nbsp;Setting</a>
+                            <a href="profile.php" class="dropdown-item"><i class="fas fa-user-circle"></i>&nbsp;Profile</a>
+                            <a href="assets/php/logout.php" class="dropdown-item"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>

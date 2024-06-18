@@ -1,80 +1,105 @@
+<?php
+    require_once 'assets/php/session.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-	<title title="Herramienta de Art-Risk">Herramienta - Art-Risk</title>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151025138-1"></script>
-	<script>
-  		window.dataLayer = window.dataLayer || [];
-  			function gtag(){dataLayer.push(arguments);}
-  			gtag('js', new Date());
-  		gtag('config', 'UA-151025138-1');
-	</script>
-
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Art-Risk tool for cultural heritage buildings evaluation">
-    <meta name="author" content="lara" >
+    <meta name="author" content="lara">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title title="Herramienta de Art-Risk">Herramienta - Art-Risk</title>
 
-	 <!-- Language menu -->
-	 <div  class="container">
-		<div  class="row col-lg-offset-11 col-md-offset-11 col-lg-1 col-md-1    col-sm-offset-11 col-xs-offset-9 col-sm-1 col-xs-1">
-				 <a class="language_label" href="tool_en.html"> English  </a>
-		</div>
-	</div> 
-	
-	
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151025138-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-151025138-1');
+    </script>
+
+    <!-- Language menu -->
+    <div class="container">
+        <div class="row col-lg-offset-11 col-md-offset-11 col-lg-1 col-md-1 col-sm-offset-11 col-xs-offset-9 col-sm-1 col-xs-1">
+            <a class="language_label" href="tool_en.html"> English </a>
+        </div>
+    </div>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
-
-    <!-- Add custom CSS here -->
+    <!-- Bootstrap 4 CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" />
+    <!-- Fontawesome CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/v/bs4/dt-2.0.7/datatables.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link href="css/art-risk.css" type="text/css" rel="stylesheet">
     <link href="ol_v5.2.0/ol.css" type="text/css" rel="stylesheet">
 
-	<!-- Agrega SweetAlert CSS -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
 
-	<!-- Agrega SweetAlert JS -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-
+    <!-- Google Fonts -->
+    <style type="text/css">
+        @import url("https://fonts.googleapis.com/css?family=Maven+Pro:400,500,600,700,800,900&display=swap");
+        * {
+            font-family: 'Maven Pro', sans-serif;
+        }
+        .dropdown-item {
+            padding: 10px 20px;
+        }
+    </style>
 </head>
-
 <body>
 
-    <div class="brand">Art-Risk</div>
-    <div class="address-bar">Inteligencia artificial aplicada a la conservación preventiva de edificios patrimoniales</div>
+<div class="brand">Art-Risk</div>
+<div class="address-bar">Inteligencia artificial aplicada a la conservación preventiva de edificios patrimoniales</div>
 
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Art-Risk</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.html">Inicio</a>
-                    </li>
-                    <li><a href="guia.html">Guia</a>
-                    </li>
-                    <li><a href="herramienta.html">Herramienta</a>
-                    </li>
-                    <li><a href="contacto.html">Contacto</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Art-Risk</a>
         </div>
-        <!-- /.container -->
-    </nav>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="guia.html">Guia</a></li>
+                <li><a href="herramienta.html">Herramienta</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+                        <i class="fas fa-user-cog"></i> &nbsp;Hi! <?= $users; ?>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item"><i class="fas fa-cog"></i>&nbsp;Setting</a>
+                        <a href="profile.php" class="dropdown-item"><i class="fas fa-user-circle"></i>&nbsp;Profile</a>
+                        <a href="assets/php/logout.php" class="dropdown-item"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- SweetAlert JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <div class="container">
 
