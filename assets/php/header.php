@@ -52,7 +52,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.php">Inicio</a></li>
                     <li><a href="guia.html">Guia</a></li>
                     <li><a href="herramienta.php">Herramienta</a></li>
                     <li><a href="contacto.html">Contacto</a></li>
